@@ -13,3 +13,18 @@ script:
   - docker run -e CI=true gabryv/docker-react npm run test
   #sezione che contiene i comandi per fare i test, -e CI=TRUE serve nella nuova versione, serve anche omettere la coverage
   #il vecchio comando con la coverage era: "docker run gabryv/docker-react npm run test -- --coverage"
+
+#deploy:
+  #provider: elasticbeanstalk (servizio di amazon che tiene su app web)
+  #region: (sta roba la trovo su aws ._., es: "us-west-2")
+  #app: (stesso nome dato all'app su aws, es: "docker")
+  #env: (lo trovo su aws vicino al nome dell'app, es: "Docker-env")
+  #bucket_name: (lo trovo su aws, creato con elasticbeans, lo trovo nella sezione s3, es: "elasticbeanstalk-us-west-2-....")
+  #bucket_path: (è lo stesso del nome dell'app, es: "docker") 
+  #on:
+    #branch: master (questo dice che il processo di deploy su aws avviene solo quando c'è qualcosa di nuovo sul branch master, non sugli altri)
+  #ora dobbiamo usare il servizio di aws chiamato: "IAM" per generare delle api per connetterci ad aws da travis e le imposto direttamente sul sito di travis
+  #così restano anonimate, se le mettevo qui invece restavano in chiaro e tutti potevano accedere al mi oaccount aws, poi qui dico come usarle:
+  #access_key_id: $AWS_ACCESS_KEY
+  #secret_access_key: "$AWS_SECRET_KEY" 
+  #---------------------diciamo come fa a passare il tutto ad aws (io commento tutto perchè non ho aws :C)---------------------------------------------------------------------------
