@@ -1,0 +1,25 @@
+version: '3'
+services:
+#i service web e test sono due container, web esegue l'app react, mentre test fa i test
+  web:
+    build:
+      context: .
+      #indico dove va a cercare i file da passare nel container
+      dockerfile: Dockerfile.dev
+      #indica quale file usare come dockerfile
+    ports:
+      - "3000:3000"
+      #map port outside:inside the container
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+      # map outside:inside the container
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - .:/home/node/app
+    command: ["npm", "run", "test"]

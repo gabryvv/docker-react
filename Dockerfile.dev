@@ -1,0 +1,17 @@
+#il .dev fa capire che verrà usato per far girare l'app solo in ambiente di development.(NON per production)
+
+FROM node:16-alpine
+
+USER node 
+#dico di usare l'utente node invece che root, così posso accedere fuori dal container per puntare le references
+
+RUN mkdir -p /home/node/app
+
+WORKDIR '/home/node/app' 
+#la directory app si trova nel container per cui non si vede dalla console
+
+COPY --chown=node:node ./package.json ./
+RUN npm install
+COPY --chown=node:node ./ ./    
+
+CMD ["npm", "run", "start"]
