@@ -1,0 +1,15 @@
+sudo: required
+#in pratica dice che travis ha bisogno di superuser permission per eseguire questa build.
+
+services:
+  - docker
+  #sezione che dice a travis di avere una copia di docker
+
+before_install:
+  - docker build -t gabryv/docker-react -f Dockerfile.dev .
+  #sezione dei comandi eseguiti prima dell'esecuzione dei test(in questo caso gli facciamo fare la build dell'immagine)
+
+script:
+  - docker run -e CI=true gabryv/docker-react npm run test
+  #sezione che contiene i comandi per fare i test, -e CI=TRUE serve nella nuova versione, serve anche omettere la coverage
+  #il vecchio comando con la coverage era: "docker run gabryv/docker-react npm run test -- --coverage"
