@@ -12,7 +12,7 @@ RUN npm install
 COPY --chown=node:node ./ ./   
 
 RUN npm run build
-#crea cartella build dove copia le cose: "/home/node/app/build"
+#crea cartella build dove copia le cose: "/home/node/app/build" 
 
 
 
